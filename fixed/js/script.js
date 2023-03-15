@@ -1,21 +1,21 @@
 
 //------------- handle search button-----------
 const searchBook = () => {
-  const searchField = document.getElementById("search-field");
+  const searchField = document.getElementById("search-input");
   const searchText = searchField.value;
 
   // ----------load data----------
   const url = `https://openlibrary.org/search.json?q=${searchText}`;
   fetch(url)
     .then((res) => res.json())
-    .then((data) => displaySearchResult(data.docs));
+    .then((data) => displaySearchResult(data));
 };
 
 // ----------display search result data----------
 const displaySearchResult = (myBooks) => {
   const searchResult = document.getElementById("search-result");
   searchResult.innerText = "";
-
+console.log(myBooks);
 
   const books = myBooks.docs;
   books.forEach((book) => {
