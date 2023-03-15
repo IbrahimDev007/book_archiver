@@ -3,7 +3,7 @@
 const searchBook = () => {
   const searchField = document.getElementById("search-input");
   const searchText = searchField.value;
-
+console.log(searchText);
   // ----------load data----------
   const url = `https://openlibrary.org/search.json?q=${searchText}`;
   fetch(url)
@@ -13,14 +13,13 @@ const searchBook = () => {
 
 // ----------display search result data----------
 const displaySearchResult = (myBooks) => {
-  const searchResult = document.getElementById("search-result");
-  searchResult.innerText = "";
-console.log(myBooks);
 
+let searchResult = document.getElementById("search-data");
+searchResult.innerHTML =`` ;
   const books = myBooks.docs;
-  books.forEach((book) => {
+  books.slice(0,15).forEach((book) => {
     console.log(book);
-    const div = document.innerHTML("div");
+    const div = document.createElement("div");
     div.classList.add("col");
     div.innerHTML = `
         <div class="card">
@@ -28,11 +27,12 @@ console.log(myBooks);
             <div class="card-body text-center">
               <h5 class="card-title"> Name: ${book.title}</h5>
               <h6> Author: ${book.author_name}</h6>
-              <p>Publisher: <small> ${book.publisher[0]} </small></p>
+              <p>Publisher: <small> ${book?.publisher[0]} </small></p>
               <small> First Published Year: ${book.first_publish_year}</small>
-            </div>
+            </div>git 
         </div>
         `;
     searchResult.appendChild(div);
   });
 };
+
